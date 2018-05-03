@@ -30,13 +30,16 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gbChromecasts = new System.Windows.Forms.GroupBox();
-            this.btnFind = new System.Windows.Forms.Button();
             this.lbChromeCasts = new System.Windows.Forms.ListBox();
+            this.btnFind = new System.Windows.Forms.Button();
             this.gbUrlBox = new System.Windows.Forms.GroupBox();
-            this.lblChromeCastName = new System.Windows.Forms.Label();
-            this.txtURL = new System.Windows.Forms.TextBox();
-            this.lblUrl = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.btnCast = new System.Windows.Forms.Button();
+            this.lblUrl = new System.Windows.Forms.Label();
+            this.txtURL = new System.Windows.Forms.TextBox();
+            this.lblChromeCastName = new System.Windows.Forms.Label();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gbChromecasts.SuspendLayout();
             this.gbUrlBox.SuspendLayout();
@@ -49,7 +52,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(437, 302);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(437, 313);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // gbChromecasts
@@ -63,6 +66,15 @@
             this.gbChromecasts.TabStop = false;
             this.gbChromecasts.Text = "Chromecasts";
             // 
+            // lbChromeCasts
+            // 
+            this.lbChromeCasts.FormattingEnabled = true;
+            this.lbChromeCasts.Location = new System.Drawing.Point(91, 20);
+            this.lbChromeCasts.Name = "lbChromeCasts";
+            this.lbChromeCasts.Size = new System.Drawing.Size(259, 95);
+            this.lbChromeCasts.TabIndex = 1;
+            this.lbChromeCasts.SelectedIndexChanged += new System.EventHandler(this.lbChromeCasts_SelectedIndexChanged);
+            // 
             // btnFind
             // 
             this.btnFind.Location = new System.Drawing.Point(9, 19);
@@ -73,44 +85,40 @@
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_ClickAsync);
             // 
-            // lbChromeCasts
-            // 
-            this.lbChromeCasts.FormattingEnabled = true;
-            this.lbChromeCasts.Location = new System.Drawing.Point(91, 20);
-            this.lbChromeCasts.Name = "lbChromeCasts";
-            this.lbChromeCasts.Size = new System.Drawing.Size(259, 95);
-            this.lbChromeCasts.TabIndex = 1;
-            this.lbChromeCasts.SelectedIndexChanged += new System.EventHandler(this.lbChromeCasts_SelectedIndexChanged);
-            // 
             // gbUrlBox
             // 
+            this.gbUrlBox.Controls.Add(this.btnDisconnect);
+            this.gbUrlBox.Controls.Add(this.btnConnect);
+            this.gbUrlBox.Controls.Add(this.lblStatus);
             this.gbUrlBox.Controls.Add(this.btnCast);
             this.gbUrlBox.Controls.Add(this.lblUrl);
             this.gbUrlBox.Controls.Add(this.txtURL);
             this.gbUrlBox.Controls.Add(this.lblChromeCastName);
             this.gbUrlBox.Location = new System.Drawing.Point(3, 148);
             this.gbUrlBox.Name = "gbUrlBox";
-            this.gbUrlBox.Size = new System.Drawing.Size(423, 139);
+            this.gbUrlBox.Size = new System.Drawing.Size(423, 153);
             this.gbUrlBox.TabIndex = 1;
             this.gbUrlBox.TabStop = false;
             this.gbUrlBox.Text = "URL";
             // 
-            // lblChromeCastName
+            // lblStatus
             // 
-            this.lblChromeCastName.AutoSize = true;
-            this.lblChromeCastName.Location = new System.Drawing.Point(7, 20);
-            this.lblChromeCastName.Name = "lblChromeCastName";
-            this.lblChromeCastName.Size = new System.Drawing.Size(0, 13);
-            this.lblChromeCastName.TabIndex = 0;
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(10, 127);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.TabIndex = 2;
             // 
-            // txtURL
+            // btnCast
             // 
-            this.txtURL.Enabled = false;
-            this.txtURL.Location = new System.Drawing.Point(10, 65);
-            this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(407, 20);
-            this.txtURL.TabIndex = 1;
-            this.txtURL.TextChanged += new System.EventHandler(this.txtURL_TextChanged);
+            this.btnCast.Enabled = false;
+            this.btnCast.Location = new System.Drawing.Point(10, 92);
+            this.btnCast.Name = "btnCast";
+            this.btnCast.Size = new System.Drawing.Size(75, 23);
+            this.btnCast.TabIndex = 3;
+            this.btnCast.Text = "Connect";
+            this.btnCast.UseVisualStyleBackColor = true;
+            this.btnCast.Click += new System.EventHandler(this.btnCast_Click);
             // 
             // lblUrl
             // 
@@ -121,22 +129,49 @@
             this.lblUrl.TabIndex = 2;
             this.lblUrl.Text = "URL";
             // 
-            // btnCast
+            // txtURL
             // 
-            this.btnCast.Enabled = false;
-            this.btnCast.Location = new System.Drawing.Point(10, 92);
-            this.btnCast.Name = "btnCast";
-            this.btnCast.Size = new System.Drawing.Size(75, 23);
-            this.btnCast.TabIndex = 3;
-            this.btnCast.Text = "Cast";
-            this.btnCast.UseVisualStyleBackColor = true;
-            this.btnCast.Click += new System.EventHandler(this.btnCast_Click);
+            this.txtURL.Enabled = false;
+            this.txtURL.Location = new System.Drawing.Point(10, 65);
+            this.txtURL.Name = "txtURL";
+            this.txtURL.Size = new System.Drawing.Size(407, 20);
+            this.txtURL.TabIndex = 1;
+            this.txtURL.Text = "https://www.pexels.com/search/nature/";
+            this.txtURL.TextChanged += new System.EventHandler(this.txtURL_TextChanged);
+            // 
+            // lblChromeCastName
+            // 
+            this.lblChromeCastName.AutoSize = true;
+            this.lblChromeCastName.Location = new System.Drawing.Point(7, 20);
+            this.lblChromeCastName.Name = "lblChromeCastName";
+            this.lblChromeCastName.Size = new System.Drawing.Size(0, 13);
+            this.lblChromeCastName.TabIndex = 0;
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(91, 92);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.TabIndex = 4;
+            this.btnConnect.Text = "Cast";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(172, 92);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.btnDisconnect.TabIndex = 5;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 302);
+            this.ClientSize = new System.Drawing.Size(437, 313);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "MainForm";
             this.Text = "Chromecast WinForm";
@@ -159,6 +194,9 @@
         private System.Windows.Forms.Button btnCast;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.TextBox txtURL;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Button btnDisconnect;
     }
 }
 
